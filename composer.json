@@ -1,0 +1,48 @@
+{
+    "name": "toro/customform-bundle",
+    "type": "symfony-bundle",
+    "description": "Custom form for Symfony2 applications, editable via web user interface.",
+    "keywords": ["custom-form"],
+    "homepage": "https://github.com/intbizth/toro-customform-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Liverbool",
+            "homepage": "https://github.com/liverbool"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "sylius/registry": "^1.0",
+        "sylius/resource-bundle": "^1.0",
+        "symfony/framework-bundle": "^2.8"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^3.1",
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Toro\\Bundle\\CustomFormBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Toro\\Bundle\\CustomFormBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

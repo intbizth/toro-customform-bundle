@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="toro.controller.forms" class="Toro\Bundle\CustomFormBundle\Controller\FormsController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="toro.form_factory.forms" class="Toro\Bundle\CustomFormBundle\Form\Factory\FormsFactory">
+            <argument type="service" id="toro.registry.forms_schema" />
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="toro.forms_manager" class="Toro\Bundle\CustomFormBundle\Manager\FormsManager">
+            <argument type="service" id="toro.registry.forms_schema" />
+            <argument type="service" id="toro.registry.forms_resolver" />
+            <argument type="service" id="toro.manager.forms" />
+            <argument type="service" id="toro.factory.forms" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="toro.registry.forms_schema" class="Sylius\Component\Registry\ServiceRegistry" lazy="true">
+            <argument>Toro\Bundle\CustomFormBundle\Schema\SchemaInterface</argument>
+            <argument>Forms Schema</argument>
+        </service>
+
+        <service id="toro.registry.forms_resolver" class="Toro\Bundle\CustomFormBundle\Resolver\ResolverServiceRegistry" lazy="true">
+            <argument type="service">
+                <service class="Sylius\Component\Registry\ServiceRegistry">
+                    <argument>Toro\Bundle\CustomFormBundle\Resolver\FormsResolverInterface</argument>
+                    <argument>Forms Resolver</argument>
+                </service>
+            </argument>
+            <argument type="service" id="toro.forms_resolver.default"/>
+        </service>
+
+        <service id="toro.forms_resolver.default" class="Toro\Bundle\CustomFormBundle\Resolver\DefaultFormsResolver">
+            <argument type="service" id="toro.repository.forms" />
+        </service>
+
+        <service id="toro.doctrine.forms_parameter_transformer_listener" class="Toro\Bundle\CustomFormBundle\Doctrine\EventListener\ParameterTransformerListener">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_listener" event="onFlush"/>
+            <tag name="doctrine.event_listener" event="postFlush"/>
+            <tag name="doctrine.event_listener" event="postLoad"/>
+        </service>
+
+        <service id="toro.templating.helper.forms" class="Toro\Bundle\CustomFormBundle\Templating\Helper\FormsHelper">
+            <argument type="service" id="toro.forms_manager" />
+            <tag name="templating.helper" alias="toro_forms" />
+        </service>
+
+        <service id="toro.twig.extension.forms" class="Toro\Bundle\CustomFormBundle\Twig\FormsExtension" public="false">
+            <argument type="service" id="toro.templating.helper.forms" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>
