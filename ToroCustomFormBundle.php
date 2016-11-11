@@ -5,9 +5,9 @@ namespace Toro\Bundle\CustomFormBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterResolversPass;
-use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Toro\Bundle\CustomFormBundle\DependencyInjection\Compiler\RegisterResolversPass;
+use Toro\Bundle\CustomFormBundle\DependencyInjection\Compiler\RegisterSchemasPass;
 
 class ToroCustomFormBundle extends AbstractResourceBundle
 {
