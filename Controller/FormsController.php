@@ -41,11 +41,12 @@ class FormsController extends FOSRestController
     public function updateAction(Request $request)
     {
         $schemaAlias = $request->attributes->get('schema');
+        $namespace = $request->attributes->get('namespace');
 
         $this->isGrantedOr403($schemaAlias);
 
         $formsManager = $this->getFormsManager();
-        $forms = $formsManager->load($schemaAlias);
+        $forms = $formsManager->load($schemaAlias, $namespace);
 
         $isApiRequest = $this->isApiRequest($request);
 
