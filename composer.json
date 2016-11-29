@@ -19,9 +19,6 @@
         "symfony/framework-bundle": "^3.2@rc"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.2",
-        "symfony/form": "^3.2@rc",
-        "symfony/validator": "^3.2@rc"
     },
     "config": {
         "bin-dir": "bin"
